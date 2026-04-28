@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kaif Shaikh | Software Engineering Student</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #111d3a;
+      --surface-alt: #162248;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.14);
+      --border: rgba(148, 163, 184, 0.18);
+      --radius: 24px;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.16), transparent 32%), linear-gradient(180deg, #0a1224 0%, #09131f 100%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 2rem 0 4rem;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      font-size: 1.1rem;
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.25s ease;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 4rem 0 3rem;
+      display: grid;
+      gap: 2rem;
+    }
+
+    .hero-inner {
+      max-width: 54rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      font-size: 0.8rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 4vw, 4.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      max-width: 45rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .button,
+    .button-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.95rem 1.75rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .button {
+      background: var(--accent);
+      color: #07172b;
+    }
+
+    .button-secondary {
+      color: var(--text);
+      border-color: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .button:hover,
+    .button-secondary:hover {
+      transform: translateY(-2px);
+    }
+
+    section {
+      margin-top: 3.5rem;
+      padding: 2.5rem 2rem;
+      border-radius: var(--radius);
+      background: rgba(15, 23, 42, 0.72);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    section + section {
+      margin-top: 2rem;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .section-heading h2 {
+      font-size: 1.3rem;
+      letter-spacing: -0.03em;
+      margin: 0;
+    }
+
+    .section-heading span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .about p,
+    .resume p,
+    .contact p {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 62ch;
+    }
+
+    .skill-grid,
+    .project-grid,
+    .contact-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .skill-card,
+    .project-card,
+    .contact-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 1.25rem;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .skill-card:hover,
+    .project-card:hover,
+    .contact-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56, 189, 248, 0.3);
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    .skill-card p {
+      margin: 0;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .project-card h3 {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .project-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .tech-pill {
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      background: rgba(56,189,248,0.14);
+      color: var(--accent);
+      border: 1px solid rgba(56,189,248,0.2);
+    }
+
+    .resume .resume-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .contact-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .contact-card h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1rem;
+    }
+
+    .contact-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.9s ease forwards;
+    }
+
+    .fade-in:nth-child(1) { animation-delay: 0.15s; }
+    .fade-in:nth-child(2) { animation-delay: 0.3s; }
+    .fade-in:nth-child(3) { animation-delay: 0.45s; }
+    .fade-in:nth-child(4) { animation-delay: 0.6s; }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .hero {
+        padding-top: 2.5rem;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        padding: 0 0 2rem;
+      }
+
+      section,
+      .hero-inner {
+        padding: 1.75rem;
+      }
+
+      .project-grid,
+      .skill-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-heading {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero h1 {
+        font-size: 2.6rem;
+      }
+
+      .button,
+      .button-secondary {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">Kaif Shaikh</div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#resume">Resume</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner fade-in">
+        <span class="eyebrow">Software Engineering Student</span>
+        <h1>Hi, I’m Kaif Shaikh — Java developer &amp; IoT enthusiast building intelligent systems with clean code.</h1>
+        <p>I design and develop embedded solutions and desktop applications while exploring system design, data structures, and problem-solving techniques. My focus is on Java development, IoT prototypes, and polished user experiences.</p>
+        <div class="hero-actions">
+          <a href="#projects" class="button">View Projects</a>
+          <a href="#contact" class="button-secondary">Get in Touch</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about fade-in">
+      <div class="section-heading">
+        <h2>About Me</h2>
+        <span>Software Engineering • Java • IoT</span>
+      </div>
+      <p>As a dedicated Software Engineering student, I enjoy solving real-world problems by building embedded systems and Java applications. I am passionate about IoT systems, working with microcontrollers like Arduino and NodeMCU, and creating smart solutions that connect hardware and software seamlessly.</p>
+    </section>
+
+    <section id="skills" class="fade-in">
+      <div class="section-heading">
+        <h2>Skills</h2>
+        <span>Strengths &amp; tools</span>
+      </div>
+      <div class="skill-grid" style="grid-template-columns: repeat(3, minmax(180px, 1fr));">
+        <div class="skill-card"><p>Java</p></div>
+        <div class="skill-card"><p>C</p></div>
+        <div class="skill-card"><p>Basic Python</p></div>
+        <div class="skill-card"><p>Arduino</p></div>
+        <div class="skill-card"><p>NodeMCU</p></div>
+        <div class="skill-card"><p>Blynk</p></div>
+        <div class="skill-card"><p>Problem Solving</p></div>
+        <div class="skill-card"><p>Data Structures &amp; Algorithms</p></div>
+      </div>
+    </section>
+
+    <section id="projects" class="fade-in">
+      <div class="section-heading">
+        <h2>Projects</h2>
+        <span>Hands-on and practical builds</span>
+      </div>
+      <div class="project-grid" style="grid-template-columns: repeat(2, minmax(260px, 1fr));">
+        <article class="project-card">
+          <h3>Mobile Controlled LED using Bluetooth</h3>
+          <p>A responsive Bluetooth-controlled lighting system using mobile commands and a microcontroller interface to toggle LEDs with a clean control flow.</p>
+          <div class="tech-list">
+            <span class="tech-pill">Bluetooth</span>
+            <span class="tech-pill">Arduino</span>
+            <span class="tech-pill">Mobile UI</span>
+          </div>
+        </article>
+        <article class="project-card">
+          <h3>Temperature Display on Mobile using Blynk &amp; NodeMCU</h3>
+          <p>Real-time temperature monitoring with NodeMCU and Blynk, delivering sensor readings to a mobile dashboard for remote observation.</p>
+          <div class="tech-list">
+            <span class="tech-pill">NodeMCU</span>
+            <span class="tech-pill">Blynk</span>
+            <span class="tech-pill">IoT</span>
+          </div>
+        </article>
+        <article class="project-card">
+          <h3>Clap ON/OFF Light with Mobile Override</h3>
+          <p>A hybrid control system that enables voice-activated lighting via clap detection plus mobile override for flexible interaction.</p>
+          <div class="tech-list">
+            <span class="tech-pill">Sound Sensor</span>
+            <span class="tech-pill">Mobile App</span>
+            <span class="tech-pill">Embedded Logic</span>
+          </div>
+        </article>
+        <article class="project-card">
+          <h3>Gas &amp; Smoke Detector</h3>
+          <p>An embedded safety system with sensor alerts for hazardous gas and smoke conditions, designed for fast alerting and dependable monitoring.</p>
+          <div class="tech-list">
+            <span class="tech-pill">MQ-2 Sensor</span>
+            <span class="tech-pill">Arduino</span>
+            <span class="tech-pill">Safety Systems</span>
+          </div>
+        </article>
+        <article class="project-card">
+          <h3>Smart Parking System</h3>
+          <p>An intelligent parking assistant that tracks availability and helps manage space usage using sensors and indicator logic.</p>
+          <div class="tech-list">
+            <span class="tech-pill">Ultrasonic Sensors</span>
+            <span class="tech-pill">Control Logic</span>
+            <span class="tech-pill">Smart Systems</span>
+          </div>
+        </article>
+        <article class="project-card">
+          <h3>Smart Plant Watering System</h3>
+          <p>An automated irrigation prototype that waters plants based on soil moisture, blending hardware sensing with responsive actuation.</p>
+          <div class="tech-list">
+            <span class="tech-pill">Soil Moisture</span>
+            <span class="tech-pill">Actuators</span>
+            <span class="tech-pill">Automation</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="resume" class="resume fade-in">
+      <div class="section-heading">
+        <h2>Resume</h2>
+        <span>Download my profile</span>
+      </div>
+      <p>Review my academic background, hands-on engineering projects, and technical skills. The resume link below is a placeholder and can be updated with your latest document.</p>
+      <div class="resume-actions">
+        <a href="#" class="button">Download Resume</a>
+      </div>
+    </section>
+
+    <section id="contact" class="contact fade-in">
+      <div class="section-heading">
+        <h2>Contact</h2>
+        <span>Let's connect</span>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>Email</h3>
+          <p>kaif.shaikh@email.com</p>
+        </div>
+        <div class="contact-card">
+          <h3>Phone</h3>
+          <p>+91 98765 43210</p>
+        </div>
+        <div class="contact-card">
+          <h3>LinkedIn</h3>
+          <p>linkedin.com/in/kaif-shaikh</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Designed for a clean and modern portfolio experience.
+    </footer>
+  </div>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', event => {
+        const targetId = link.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          event.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
